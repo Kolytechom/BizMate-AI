@@ -1,0 +1,361 @@
+I think this is the right approach. A **Lovable Context Pack** is much more effective than giving Lovable a large PRD because it focuses on the information the AI needs to make implementation decisions.
+
+Below is the document I recommend using as the **first document** you upload to Lovable.
+
+---
+
+# BizMate AI – Lovable Context Pack v1.0
+
+## Project Overview
+
+**Project Name:** BizMate AI
+
+**Tagline:**
+**Your AI Business Assistant**
+
+## Mission
+
+BizMate AI helps small and medium-sized businesses, especially in Africa, manage customers, sales, credit sales, expenses, and business insights through an AI-powered assistant that supports voice and multiple local languages.
+
+The application must remain simple enough for a non-technical business owner while providing enterprise-quality reliability.
+
+---
+
+# Product Vision
+
+BizMate AI is **not** an accounting application.
+
+It is an **AI Business Assistant** that helps business owners:
+
+* Record sales
+* Track customer debts
+* Record expenses
+* Find customers quickly
+* Ask business questions using natural language
+* Work offline
+* Receive intelligent business insights
+
+The AI assists but never replaces the business owner's decisions.
+
+---
+
+# Target Users
+
+Primary users include:
+
+* Computer accessory dealers
+* Phone dealers
+* Electronics shops
+* Fashion retailers
+* Spare parts dealers
+* Pharmacies
+* Small supermarkets
+* General retail businesses
+
+The application must be usable by someone with little accounting knowledge.
+
+---
+
+# Core Principles
+
+These principles are mandatory.
+
+* Mobile-first.
+* Offline-first.
+* AI assists; users confirm.
+* Security by design.
+* Fast performance.
+* Clean and simple interface.
+* No unnecessary complexity.
+* No duplicate functionality.
+* Reusable components only.
+* Modular architecture.
+
+---
+
+# AI Principles
+
+The AI must:
+
+* Understand English.
+* Understand Nigerian Pidgin.
+* Understand Yoruba.
+* Understand Hausa.
+* Understand Igbo.
+* Support mixed-language conversations.
+* Never invent financial information.
+* Never save transactions automatically.
+* Always display a confirmation screen before saving.
+
+---
+
+# Version 1 Scope
+
+Implement:
+
+* Authentication
+* Dashboard
+* Customers
+* Product Catalogue
+* Sales
+* Credit Sales
+* Payments
+* Expenses
+* Business Timeline
+* Daily Brief
+* AI Assistant
+* AI Business Memory
+* Offline Synchronisation
+* Notifications
+* Audit Trail
+
+Do **not** implement inventory tracking in Version 1.
+
+---
+
+# Design Standards
+
+Use a premium, modern interface.
+
+Requirements:
+
+* 8-point spacing system.
+* Rounded cards.
+* Rounded buttons.
+* Light Mode.
+* Dark Mode.
+* Responsive layouts.
+* Large touch targets.
+* Clean typography.
+* Smooth animations.
+* One-handed usability.
+
+---
+
+# Branding
+
+App Name:
+
+BizMate AI
+
+Primary Colour:
+
+Deep Blue
+
+Secondary Colour:
+
+Sky Blue
+
+Success:
+
+Green
+
+Warning:
+
+Orange
+
+Error:
+
+Red
+
+Neutral backgrounds.
+
+Premium appearance similar to modern SaaS products.
+
+---
+
+# Architecture Rules
+
+Before implementing any feature:
+
+* Audit the project.
+* Reuse existing components.
+* Reuse existing database tables.
+* Reuse existing services.
+* Reuse navigation.
+* Avoid duplicate code.
+
+Never redesign approved functionality unless instructed.
+
+---
+
+# Business Rules
+
+* Customers may have multiple sales.
+* A sale contains one or more sale items.
+* Payments may be partial.
+* Customer balances are calculated, never manually edited.
+* Products are a catalogue only in Version 1.
+* Expenses are independent records.
+* Financial actions require confirmation.
+* Every financial action generates an audit record.
+* Every important event generates a timeline event.
+
+---
+
+# Rules Engine
+
+All financial actions must pass through a central Rules Engine.
+
+The Rules Engine validates:
+
+* Required fields.
+* Duplicate customers.
+* Payment amounts.
+* Credit calculations.
+* Invalid dates.
+* Business rules.
+
+No financial record bypasses the Rules Engine.
+
+---
+
+# AI Workflow
+
+Voice/Text
+
+↓
+
+Language Detection
+
+↓
+
+Intent Recognition
+
+↓
+
+Entity Extraction
+
+↓
+
+Rules Engine
+
+↓
+
+Confirmation Card
+
+↓
+
+User Approval
+
+↓
+
+Save
+
+↓
+
+Audit
+
+↓
+
+Timeline
+
+↓
+
+Dashboard Update
+
+↓
+
+AI Memory Update
+
+---
+
+# Offline Rules
+
+The application must:
+
+* Work without internet.
+* Queue offline transactions.
+* Synchronise automatically.
+* Detect conflicts.
+* Never lose confirmed data.
+
+---
+
+# Security Rules
+
+Use:
+
+* Authentication
+* Row Level Security
+* JWT
+* Secure local storage
+* PIN
+* Biometrics
+
+Never expose sensitive information.
+
+---
+
+# Future Modules
+
+The architecture must support future plugins:
+
+* Inventory
+* Procurement
+* CRM
+* Payroll
+* Barcode
+* Receipt OCR
+* WhatsApp
+* Banking
+* Multi-Branch
+
+Without redesigning Version 1.
+
+---
+
+# Coding Standards
+
+* TypeScript.
+* Reusable components.
+* Modular architecture.
+* Consistent naming.
+* Strong typing.
+* Error handling.
+* Loading states.
+* Empty states.
+* Responsive layouts.
+
+---
+
+# Development Process
+
+Before every change:
+
+1. Audit the project.
+2. Reuse existing functionality.
+3. Build only the requested sprint.
+4. Test.
+5. Optimise.
+6. Document changes.
+
+---
+
+# Non-Negotiable Rules
+
+* Never fabricate business data.
+* Never save AI-generated transactions automatically.
+* Never bypass the Rules Engine.
+* Never remove the audit trail.
+* Never remove offline support.
+* Never duplicate functionality.
+* Always optimise for simplicity.
+
+---
+
+# Instructions for Lovable
+
+Treat this document as the **authoritative project context**.
+
+Whenever a new prompt is received:
+
+1. Audit the current project.
+2. Preserve the existing architecture.
+3. Extend the application without duplication.
+4. Follow the design system.
+5. Follow the Rules Engine.
+6. Follow the AI workflow.
+7. Keep the code modular and production-ready.
+
+If any prompt conflicts with this document, ask for clarification before making changes.
