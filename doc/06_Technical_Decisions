@@ -1,0 +1,335 @@
+# BizMate AI
+
+# Technical Decisions
+
+**Version:** 1.0  
+**Status:** Approved  
+**Project:** BizMate AI
+
+---
+
+# Purpose
+
+This document records the key technical decisions made during the design of BizMate AI.
+
+Every future technical change should either follow these decisions or formally document why a different approach was chosen.
+
+---
+
+# TD-001 — Architecture Style
+
+**Decision**
+
+Use a layered, modular architecture with an event-driven communication model.
+
+**Reason**
+
+Improves maintainability, scalability, and testing.
+
+---
+
+# TD-002 — Offline-First
+
+**Decision**
+
+All business transactions are written locally first and synchronized with Supabase when connectivity is available.
+
+**Reason**
+
+Many target users experience unreliable internet connectivity.
+
+---
+
+# TD-003 — Backend Platform
+
+**Decision**
+
+Use Supabase.
+
+**Reason**
+
+Provides PostgreSQL, authentication, storage, Row Level Security, Edge Functions, and real-time capabilities in a single platform.
+
+---
+
+# TD-004 — Frontend Framework
+
+**Decision**
+
+React + TypeScript + Vite.
+
+**Reason**
+
+Fast development, strong typing, excellent ecosystem, and compatibility with Lovable.
+
+---
+
+# TD-005 — UI Framework
+
+**Decision**
+
+Tailwind CSS with shadcn/ui.
+
+**Reason**
+
+Modern, accessible, reusable components with excellent customization.
+
+---
+
+# TD-006 — Authentication
+
+**Decision**
+
+Use Supabase Authentication.
+
+Support:
+
+- Email/password
+- Session persistence
+- PIN protection
+- Biometrics (future)
+
+---
+
+# TD-007 — Database IDs
+
+**Decision**
+
+Use UUIDs for all primary keys.
+
+**Reason**
+
+Better synchronization and globally unique identifiers.
+
+---
+
+# TD-008 — Product Strategy
+
+**Decision**
+
+Version 1 includes a product catalogue only.
+
+Inventory management will be introduced in a future release.
+
+---
+
+# TD-009 — AI Confirmation
+
+**Decision**
+
+The AI never commits financial records directly.
+
+Every AI-generated transaction requires explicit user confirmation.
+
+---
+
+# TD-010 — Rules Engine
+
+**Decision**
+
+Every financial operation passes through a central Rules Engine.
+
+Responsibilities include:
+
+- Validation
+- Duplicate detection
+- Financial calculations
+- Business rules
+
+---
+
+# TD-011 — Duplicate Detection
+
+**Decision**
+
+Duplicate detection should combine:
+
+- Name similarity
+- Phone number
+- Email
+- Business history
+- AI confidence
+
+The system should suggest likely matches rather than automatically merging records.
+
+---
+
+# TD-012 — AI Languages
+
+Version 1 supports:
+
+- English
+- Yoruba
+- Hausa
+- Igbo
+- Nigerian Pidgin
+
+Mixed-language conversations should be interpreted where possible.
+
+---
+
+# TD-013 — AI Memory
+
+The AI learns only from confirmed transactions.
+
+Rejected or cancelled actions must not influence AI Business Memory.
+
+---
+
+# TD-014 — Event Bus
+
+Major business actions publish events that other services consume independently.
+
+Examples:
+
+- SaleRecorded
+- PaymentReceived
+- ExpenseRecorded
+- CustomerCreated
+
+---
+
+# TD-015 — Audit Trail
+
+Financial actions generate immutable audit records.
+
+Audit entries cannot be edited or deleted.
+
+---
+
+# TD-016 — Synchronization
+
+Synchronization should:
+
+- Retry automatically
+- Detect conflicts
+- Preserve user data
+- Avoid duplicate uploads
+
+---
+
+# TD-017 — Security
+
+Use:
+
+- JWT
+- HTTPS
+- Row Level Security
+- Secure local storage
+- Least privilege
+
+---
+
+# TD-018 — API Design
+
+RESTful APIs
+
+Version prefix:
+
+/api/v1/
+
+Consistent JSON responses.
+
+---
+
+# TD-019 — Search
+
+Search should support:
+
+- Customers
+- Products
+- Sales
+- Payments
+- Expenses
+
+Use indexed fields where practical.
+
+---
+
+# TD-020 — Plugin Architecture
+
+Future modules should integrate without modifying existing core services.
+
+Examples:
+
+- Inventory
+- CRM
+- Payroll
+- POS
+- Banking
+- WhatsApp Business
+
+---
+
+# TD-021 — Error Handling
+
+Every feature must provide:
+
+- Loading states
+- Empty states
+- Helpful error messages
+- Retry options
+
+---
+
+# TD-022 — Performance Targets
+
+Dashboard:
+
+< 2 seconds
+
+Search:
+
+< 500 ms
+
+AI Response:
+
+< 5 seconds (network permitting)
+
+---
+
+# TD-023 — Accessibility
+
+Support:
+
+- Responsive layouts
+- Touch-friendly controls
+- Readable typography
+- Keyboard accessibility where applicable
+
+---
+
+# TD-024 — Source of Truth
+
+Project documentation order of precedence:
+
+1. Master Blueprint
+2. PRD
+3. Architecture
+4. Technical Decisions
+5. Sprint Roadmap
+6. Context Pack
+
+If documentation conflicts, update the documents rather than making undocumented implementation changes.
+
+---
+
+# References
+
+- 01_Context_Pack.md
+- 02_PRD.md
+- 03_Master_Blueprint.md
+- 04_Architecture.md
+- 05_Sprint_Roadmap.md
+
+---
+
+# Document Control
+
+**Document:** Technical Decisions
+
+**Version:** 1.0
+
+**Status:** Approved
+
+This document records the architectural decisions governing BizMate AI.
