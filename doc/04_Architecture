@@ -1,0 +1,538 @@
+# BizMate AI
+
+# Software Architecture
+
+**Version:** 1.0  
+**Status:** Approved  
+**Project:** BizMate AI
+
+---
+
+# Purpose
+
+This document defines the technical architecture of BizMate AI.
+
+It establishes how the application is organized, how services communicate, how data flows through the system, and the architectural rules that every implementation must follow.
+
+This document is the primary technical reference for developers and AI coding assistants.
+
+---
+
+# Architecture Overview
+
+BizMate AI is an AI-first, offline-first, modular business platform.
+
+The application follows a layered architecture.
+
+```
+Presentation Layer
+        │
+        ▼
+Application Layer
+        │
+        ▼
+Business Services
+        │
+        ▼
+Rules Engine
+        │
+        ▼
+AI Orchestration Layer
+        │
+        ▼
+Data Access Layer
+        │
+        ▼
+Local Storage + Supabase
+```
+
+Each layer has a single responsibility.
+
+No layer should bypass another.
+
+---
+
+# Architectural Principles
+
+The architecture is built on these principles:
+
+- Offline-first
+- Mobile-first
+- Layered architecture
+- Event-driven communication
+- AI-assisted workflows
+- Modular services
+- Security by design
+- Scalability
+- Reusability
+
+---
+
+# Technology Stack
+
+## Frontend
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- shadcn/ui
+
+## Backend
+
+- Supabase
+- PostgreSQL
+- Row Level Security (RLS)
+- Edge Functions
+
+## AI Layer
+
+- AI Gateway
+- Language Detection
+- Speech-to-Text
+- Intent Recognition
+- Entity Extraction
+- Confirmation Engine
+- AI Business Memory
+
+---
+
+# Core Services
+
+## Authentication Service
+
+Responsibilities:
+
+- Registration
+- Login
+- Session management
+- PIN
+- Biometrics
+
+---
+
+## Customer Service
+
+Responsibilities:
+
+- Customer management
+- Search
+- Duplicate detection
+- Purchase history
+
+---
+
+## Product Service
+
+Version 1:
+
+- Product catalogue
+- Pricing
+- Categories
+
+No inventory management in Version 1.
+
+---
+
+## Sales Service
+
+Responsibilities:
+
+- Cash sales
+- Credit sales
+- Discounts
+- Sale items
+- Totals
+
+---
+
+## Payment Service
+
+Responsibilities:
+
+- Record payments
+- Partial payments
+- Balance updates
+
+---
+
+## Expense Service
+
+Responsibilities:
+
+- Expense recording
+- Categories
+- Reporting
+
+---
+
+## Dashboard Service
+
+Provides:
+
+- Business summary
+- Daily Brief
+- Recent activity
+- KPIs
+
+---
+
+## Notification Service
+
+Responsible for:
+
+- Payment reminders
+- Daily Brief
+- Synchronization alerts
+- Future push notifications
+
+---
+
+## Synchronization Service
+
+Responsible for:
+
+- Offline queue
+- Upload
+- Download
+- Retry
+- Conflict detection
+
+---
+
+## Audit Service
+
+Responsible for:
+
+- Immutable audit records
+- Financial traceability
+
+---
+
+## AI Orchestration Service
+
+Coordinates:
+
+- AI Gateway
+- Language Detection
+- Intent Recognition
+- Entity Extraction
+- Confidence Evaluation
+- Confirmation Flow
+
+---
+
+## Rules Engine
+
+The Rules Engine is the heart of the application.
+
+Every financial operation passes through it.
+
+Responsibilities:
+
+- Validation
+- Duplicate detection
+- Business rule enforcement
+- Calculations
+- Approval checks
+
+No financial record may bypass the Rules Engine.
+
+---
+
+# Event-Driven Architecture
+
+BizMate AI uses an Event Bus to decouple services.
+
+Example:
+
+```
+Sale Recorded
+      │
+      ▼
+ Event Bus
+      │
+ ├── Dashboard
+ ├── Timeline
+ ├── Audit
+ ├── Notifications
+ ├── Synchronization
+ └── AI Memory
+```
+
+Each service responds independently.
+
+---
+
+# Standard Business Events
+
+Examples:
+
+- CustomerCreated
+- CustomerUpdated
+- ProductCreated
+- SaleRecorded
+- PaymentReceived
+- ExpenseRecorded
+- TimelineCreated
+- NotificationSent
+- SyncCompleted
+- AIConversationConfirmed
+
+Future modules subscribe to these events without changing existing services.
+
+---
+
+# AI Workflow
+
+```
+Voice/Text
+      │
+      ▼
+Language Detection
+      │
+      ▼
+Speech-to-Text
+      │
+      ▼
+Intent Recognition
+      │
+      ▼
+Entity Extraction
+      │
+      ▼
+Confidence Evaluation
+      │
+      ▼
+Rules Engine
+      │
+      ▼
+Confirmation Card
+      │
+      ▼
+User Approval
+      │
+      ▼
+Database
+      │
+      ▼
+Event Bus
+      │
+      ▼
+Dashboard / Timeline / Audit / AI Memory
+```
+
+---
+
+# AI Safety
+
+The AI must:
+
+- Ask for clarification when uncertain.
+- Never fabricate business data.
+- Never invent customers.
+- Never invent products.
+- Never save transactions automatically.
+- Never bypass validation.
+
+The user always has final approval.
+
+---
+
+# Database Architecture
+
+Core entities:
+
+- Business
+- User
+- Customer
+- Product
+- Sale
+- Sale Item
+- Payment
+- Expense
+- Timeline Event
+- Audit Event
+- AI Conversation
+- AI Business Memory
+- Notification
+- Synchronization Task
+
+Every business-owned record includes:
+
+- UUID
+- business_id
+- created_at
+- updated_at
+- sync_status
+- version
+
+---
+
+# Database Views
+
+The application uses read-only views for reporting.
+
+Examples:
+
+- vw_dashboard_summary
+- vw_customer_balances
+- vw_sales_today
+- vw_outstanding_credit
+- vw_top_products
+- vw_daily_brief
+- vw_recent_activity
+- vw_ai_business_insights
+- vw_sync_status
+
+The AI should query these views whenever possible instead of raw tables.
+
+---
+
+# API Architecture
+
+All endpoints follow:
+
+```
+/api/v1/
+```
+
+Groups:
+
+- Authentication
+- Customers
+- Products
+- Sales
+- Payments
+- Expenses
+- Dashboard
+- AI
+- Notifications
+- Synchronization
+
+API Principles:
+
+- REST
+- HTTPS
+- JWT
+- JSON
+- Versioning
+- Consistent error responses
+
+---
+
+# Offline Architecture
+
+The application stores local data first.
+
+When online:
+
+- Upload pending records.
+- Download updates.
+- Resolve conflicts.
+- Update sync status.
+
+The user should rarely need to manage synchronization manually.
+
+---
+
+# Security
+
+Security measures include:
+
+- JWT Authentication
+- Row Level Security
+- HTTPS
+- Secure local storage
+- PIN
+- Biometrics
+- Least privilege access
+- Immutable audit logs
+
+---
+
+# Performance Targets
+
+- Dashboard < 2 seconds
+- Search < 500 ms
+- AI response < 5 seconds (subject to network conditions)
+- Smooth scrolling
+- Responsive interactions
+- Efficient synchronization
+
+---
+
+# Plugin Architecture
+
+Future modules:
+
+- Inventory
+- Procurement
+- CRM
+- Payroll
+- POS
+- Receipt OCR
+- Barcode
+- Banking
+- WhatsApp Business
+- Multi-Branch
+
+Each plugin communicates through service interfaces and the Event Bus.
+
+---
+
+# Development Rules
+
+Before implementing any feature:
+
+1. Review project documentation.
+2. Audit the existing codebase.
+3. Reuse existing services.
+4. Reuse existing components.
+5. Avoid duplicate functionality.
+6. Preserve offline capability.
+7. Preserve security.
+8. Follow the Rules Engine.
+
+---
+
+# Architecture Decision Summary
+
+The application adopts:
+
+- Offline-first architecture
+- Layered architecture
+- Event-driven communication
+- AI-assisted workflows
+- Central Rules Engine
+- Immutable Audit Trail
+- Modular service design
+- Read-only reporting views
+- UUID primary keys
+- Row Level Security
+
+---
+
+# References
+
+Related project documents:
+
+- 01_Context_Pack.md
+- 02_PRD.md
+- 03_Master_Blueprint.md
+- 05_Sprint_Roadmap.md
+- 06_Technical_Decisions.md
+
+---
+
+# Document Control
+
+**Document:** Software Architecture
+
+**Project:** BizMate AI
+
+**Version:** 1.0
+
+**Status:** Approved for Development
+
+This document defines the technical architecture of BizMate AI and serves as the implementation reference for all engineering work.
