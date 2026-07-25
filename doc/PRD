@@ -1,0 +1,430 @@
+# BizMate AI
+
+# Product Requirements Document (PRD)
+
+**Version:** 1.0
+
+**Status:** Approved
+
+**Last Updated:** July 2026
+
+---
+
+# 1. Introduction
+
+## Product Name
+
+**BizMate AI**
+
+## Tagline
+
+**Your AI Business Assistant**
+
+## Mission
+
+To empower small and medium-sized businesses with a multilingual AI-powered business assistant that simplifies business record keeping, improves financial visibility, and works reliably both online and offline.
+
+## Vision
+
+To become Africa's leading AI-powered Business Operating System for SMEs.
+
+---
+
+# 2. Problem Statement
+
+Many small businesses still depend on paper notebooks, memory, or spreadsheets to manage daily operations.
+
+Common challenges include:
+
+- Lost sales records
+- Poor customer debt tracking
+- Forgotten expenses
+- Duplicate customer entries
+- No business insights
+- Poor reporting
+- Difficulty using complex accounting software
+- Limited internet connectivity
+
+BizMate AI solves these problems with a simple, intelligent, mobile-first application.
+
+---
+
+# 3. Product Goals
+
+BizMate AI should enable business owners to:
+
+- Record sales within seconds
+- Track customer balances
+- Record expenses easily
+- Search business records instantly
+- Receive intelligent business insights
+- Operate without internet access
+- Use voice in multiple Nigerian languages
+- Make informed business decisions
+
+---
+
+# 4. Target Users
+
+Primary users include:
+
+- Computer accessory dealers
+- Desktop and laptop sellers
+- Electronics retailers
+- Phone dealers
+- Fashion stores
+- Pharmacies
+- Spare parts dealers
+- Supermarkets
+- Small retail businesses
+- Service providers
+
+The application must be usable by people with little or no accounting knowledge.
+
+---
+
+# 5. Product Principles
+
+BizMate AI follows these principles:
+
+- Simplicity over complexity
+- Mobile-first design
+- Offline-first architecture
+- AI assists but never replaces the user
+- Security by design
+- High performance
+- Modular architecture
+- Accessibility
+- Auditability
+- Scalability
+
+---
+
+# 6. Core Features (Version 1)
+
+## Authentication
+
+- User registration
+- Login
+- Secure sessions
+- PIN protection
+- Biometric authentication
+
+---
+
+## Dashboard
+
+Displays:
+
+- Today's Sales
+- Today's Expenses
+- Outstanding Credit
+- Recent Activity
+- Daily Brief
+- Quick Actions
+
+---
+
+## Customers
+
+Features:
+
+- Create customer
+- Edit customer
+- Delete customer (soft delete)
+- Customer history
+- Smart duplicate detection
+- Customer search
+
+---
+
+## Product Catalogue
+
+Version 1 includes:
+
+- Product name
+- Brand
+- Category
+- Default selling price
+- Notes
+
+Inventory quantities are intentionally excluded from Version 1.
+
+---
+
+## Sales
+
+Supports:
+
+- Cash sales
+- Credit sales
+- Multiple products
+- Discounts
+- Notes
+- Automatic calculations
+
+---
+
+## Payments
+
+Supports:
+
+- Full payment
+- Partial payment
+- Multiple instalments
+- Outstanding balance tracking
+
+---
+
+## Expenses
+
+Supports:
+
+- Expense categories
+- Amount
+- Date
+- Notes
+
+---
+
+## AI Assistant
+
+Supports:
+
+- Voice input
+- Text input
+- Natural language understanding
+- Business questions
+- Sales recording
+- Expense recording
+- Customer search
+- Product search
+
+---
+
+## AI Business Memory
+
+Learns only from confirmed transactions.
+
+Tracks:
+
+- Frequently sold products
+- Customer behaviour
+- Business trends
+- Common pricing
+
+---
+
+## Business Timeline
+
+Automatically records:
+
+- Sales
+- Payments
+- Expenses
+- Customer updates
+- AI-assisted actions
+
+---
+
+## Daily Brief
+
+Provides:
+
+- Sales summary
+- Expense summary
+- Outstanding balances
+- Best-selling products
+- Business insights
+
+---
+
+## Notifications
+
+Supports:
+
+- Payment reminders
+- Daily summary
+- Synchronisation status
+- Backup reminders
+
+---
+
+## Offline Mode
+
+Allows:
+
+- Offline data entry
+- Local storage
+- Automatic synchronisation
+- Conflict detection
+
+---
+
+## Audit Trail
+
+Records:
+
+- Financial actions
+- User actions
+- AI confirmations
+- Record updates
+
+Audit records cannot be modified.
+
+---
+
+# 7. AI Requirements
+
+The AI must:
+
+- Understand English
+- Understand Nigerian Pidgin
+- Understand Yoruba
+- Understand Hausa
+- Understand Igbo
+- Detect mixed-language conversations
+- Extract business information accurately
+- Ask for clarification when uncertain
+- Require user confirmation before saving
+
+The AI must never:
+
+- Invent financial data
+- Save transactions automatically
+- Modify historical records
+- Ignore business validation rules
+
+---
+
+# 8. Functional Requirements
+
+The system shall:
+
+- Create customers
+- Create products
+- Record sales
+- Record payments
+- Record expenses
+- Calculate customer balances
+- Generate dashboard summaries
+- Maintain audit logs
+- Generate business timeline events
+- Operate offline
+- Synchronise automatically
+- Detect duplicate customers intelligently
+
+---
+
+# 9. Non-Functional Requirements
+
+## Performance
+
+- Dashboard loads in under 2 seconds
+- Search results under 500 milliseconds
+- AI responses under 5 seconds (network permitting)
+
+## Security
+
+- JWT authentication
+- Row Level Security
+- Encrypted communication
+- Secure local storage
+- PIN and biometric support
+
+## Reliability
+
+- Offline-first
+- Automatic retry
+- Crash recovery
+- Data integrity
+
+## Scalability
+
+Architecture must support:
+
+- Inventory
+- Procurement
+- CRM
+- Payroll
+- Multi-branch
+- Banking integration
+- WhatsApp integration
+
+without redesigning Version 1.
+
+---
+
+# 10. Business Rules
+
+- Customer balances are calculated.
+- Products are catalogue items only.
+- Every sale requires at least one sale item.
+- Payments cannot exceed outstanding balances.
+- Expenses cannot have negative values.
+- AI-generated transactions require confirmation.
+- Every financial action creates an audit record.
+- Every important event creates a timeline event.
+
+---
+
+# 11. Success Metrics
+
+BizMate AI is successful when users can:
+
+- Record a sale in less than 15 seconds
+- Find any customer within 3 seconds
+- Operate confidently without internet
+- Receive accurate AI suggestions
+- Reduce bookkeeping errors
+- Improve debt recovery
+
+---
+
+# 12. Future Enhancements
+
+Future versions may include:
+
+- Inventory Management
+- Supplier Management
+- Purchase Orders
+- Barcode Scanning
+- Receipt OCR
+- POS
+- CRM
+- Payroll
+- Banking Integration
+- WhatsApp Business Integration
+- Multi-Branch Support
+- Advanced Analytics
+- AI Forecasting
+
+---
+
+# 13. Acceptance Criteria
+
+Version 1 is complete when:
+
+- All core modules function correctly.
+- Offline synchronisation is reliable.
+- AI confirmation workflow is operational.
+- Audit logging is complete.
+- Dashboard displays accurate data.
+- Performance targets are achieved.
+- Security requirements are satisfied.
+- Mobile experience is responsive.
+- Codebase remains modular and maintainable.
+
+---
+
+# 14. Document Control
+
+**Document Name:** Product Requirements Document
+
+**Project:** BizMate AI
+
+**Version:** 1.0
+
+**Status:** Approved for Development
+
+This document serves as the authoritative definition of product requirements for BizMate AI and must be reviewed before implementing any new feature.
