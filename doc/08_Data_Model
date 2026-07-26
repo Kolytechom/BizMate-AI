@@ -1,0 +1,876 @@
+# BizMate AI Data Model
+Version: 1.0
+Status: Approved
+Last Updated: 2026-07-26
+
+---
+
+# 1. Purpose
+
+This document defines the logical data model for BizMate AI.
+
+It describes the business entities, their relationships, ownership model, constraints, and data governance rules.
+
+It is independent of any specific database technology. SQL migration files will implement this model.
+
+---
+
+# 2. Data Model Principles
+
+The data model follows these principles:
+
+- UUID primary keys
+- Multi-tenant by design
+- Business-owned data
+- UTC timestamps
+- Immutable audit history
+- Soft deletes where appropriate
+- Referential integrity
+- Minimal redundancy
+- Future extensibility
+
+---
+
+# 3. Naming Conventions
+
+## Tables
+
+Plural nouns.
+
+Examples:
+
+- businesses
+- customers
+- products
+- sales
+
+---
+
+## Primary Keys
+
+Every table uses:
+
+id
+
+(UUID)
+
+---
+
+## Foreign Keys
+
+Use:
+
+business_id
+
+customer_id
+
+product_id
+
+sale_id
+
+payment_id
+
+expense_id
+
+user_id
+
+---
+
+## Timestamps
+
+created_at
+
+updated_at
+
+deleted_at
+
+All timestamps are stored in UTC.
+
+---
+
+# 4. Multi-Tenant Ownership
+
+Every business owns its own data.
+
+Relationship:
+
+Business
+
+↓
+
+Customers
+
+↓
+
+Products
+
+↓
+
+Sales
+
+↓
+
+Payments
+
+↓
+
+Expenses
+
+↓
+
+Timeline
+
+↓
+
+Notifications
+
+↓
+
+AI Memory
+
+No business can access another business's data.
+
+---
+
+# 5. Core Entity Overview
+
+The logical model contains the following entities:
+
+- profiles
+- businesses
+- business_members
+- settings
+- customers
+- products
+- sales
+- sale_items
+- payments
+- expenses
+- timeline_events
+- audit_logs
+- notifications
+- ai_memory
+- sync_queue
+- media_files
+
+Future entities:
+
+- suppliers
+- inventory
+- purchase_orders
+- stock_movements
+- branches
+- crm_contacts
+
+---
+
+# 6. Entity Definitions
+
+## 6.1 Profiles
+
+Purpose:
+
+Stores user profile information.
+
+Fields:
+
+- id
+- user_id
+- display_name
+- email
+- phone
+- preferred_language
+- preferred_theme
+- created_at
+- updated_at
+
+Relationships:
+
+One User
+
+↓
+
+Many Businesses
+
+(via business_members)
+
+---
+
+## 6.2 Businesses
+
+Purpose:
+
+Represents an organisation using BizMate AI.
+
+Fields:
+
+- id
+- business_name
+- business_type
+- currency
+- timezone
+- owner_user_id
+- logo_url
+- created_at
+- updated_at
+
+Relationships:
+
+One Business
+
+↓
+
+Many Members
+
+↓
+
+Many Customers
+
+↓
+
+Many Products
+
+↓
+
+Many Sales
+
+↓
+
+Many Expenses
+
+---
+
+## 6.3 Business Members
+
+Purpose:
+
+Connects users to businesses.
+
+Fields:
+
+- id
+- business_id
+- user_id
+- role
+- status
+- invited_at
+- joined_at
+
+Supported Roles:
+
+- Owner
+- Admin
+- Manager
+- Staff
+
+---
+
+## 6.4 Settings
+
+Purpose:
+
+Stores business-wide preferences.
+
+Fields:
+
+- id
+- business_id
+- language
+- theme
+- currency
+- tax_enabled
+- notification_settings
+- ai_preferences
+- created_at
+- updated_at
+
+---
+
+## 6.5 Customers
+
+Purpose:
+
+Stores customer information.
+
+Fields:
+
+- id
+- business_id
+- customer_name
+- phone
+- email
+- address
+- notes
+- credit_limit
+- current_balance
+- created_at
+- updated_at
+- deleted_at
+
+Rules:
+
+Customer names are checked by the Duplicate Detection Engine before creation.
+
+Soft delete supported.
+
+---
+
+## 6.6 Products
+
+Purpose:
+
+Stores products and services.
+
+Fields:
+
+- id
+- business_id
+- product_name
+- sku
+- barcode
+- category
+- selling_price
+- cost_price
+- description
+- image_url
+- active
+- created_at
+- updated_at
+- deleted_at
+
+Rules:
+
+Inventory quantities are NOT included in Version 1.
+
+Duplicate Detection applies.
+
+---
+
+## 6.7 Sales
+
+Purpose:
+
+Represents a completed sale.
+
+Fields:
+
+- id
+- business_id
+- customer_id
+- sale_number
+- sale_date
+- subtotal
+- discount
+- tax
+- total
+- amount_paid
+- balance_due
+- payment_status
+- created_by
+- created_at
+
+Rules:
+
+Every sale belongs to exactly one business.
+
+Sales cannot exist without at least one Sale Item.
+
+Financial values are calculated by the Rules Engine.
+
+---
+
+## 6.8 Sale Items
+
+Purpose:
+
+Stores line items within a sale.
+
+Fields:
+
+- id
+- sale_id
+- product_id
+- quantity
+- unit_price
+- discount
+- total
+
+Relationships:
+
+One Sale
+
+↓
+
+Many Sale Items
+
+Each Sale Item references exactly one Product.
+
+---
+
+## 6.9 Payments
+
+Purpose:
+
+Records payments against credit sales.
+
+Fields:
+
+- id
+- business_id
+- sale_id
+- customer_id
+- payment_date
+- payment_method
+- amount
+- reference
+- notes
+- created_at
+
+Rules:
+
+Payments cannot exceed the outstanding balance.
+
+Validated by the Rules Engine.
+
+---
+
+## 6.10 Expenses
+
+Purpose:
+
+Stores all business expenses.
+
+Fields:
+
+- id
+- business_id
+- expense_category
+- description
+- amount
+- expense_date
+- payment_method
+- reference
+- attachment_url
+- created_by
+- created_at
+- updated_at
+- deleted_at
+
+Rules:
+
+- Expense amount must be greater than zero.
+- Expenses cannot be edited after reconciliation (future feature).
+- Soft delete is supported.
+
+---
+
+## 6.11 Timeline Events
+
+Purpose:
+
+Provides a chronological business activity history.
+
+Fields:
+
+- id
+- business_id
+- entity_type
+- entity_id
+- event_type
+- title
+- description
+- performed_by
+- metadata
+- created_at
+
+Examples:
+
+- Customer Created
+- Product Updated
+- Sale Recorded
+- Payment Received
+- Expense Added
+- AI Suggestion Accepted
+
+Timeline records are immutable.
+
+---
+
+## 6.12 Audit Logs
+
+Purpose:
+
+Maintains a permanent record of all sensitive system actions.
+
+Fields:
+
+- id
+- business_id
+- user_id
+- action
+- entity_type
+- entity_id
+- previous_value
+- new_value
+- ip_address
+- device_information
+- created_at
+
+Rules:
+
+Audit logs are never edited or deleted.
+
+---
+
+## 6.13 Notifications
+
+Purpose:
+
+Stores application notifications.
+
+Fields:
+
+- id
+- business_id
+- user_id
+- notification_type
+- title
+- message
+- priority
+- read_status
+- created_at
+
+Supported priorities:
+
+- Information
+- Success
+- Warning
+- Error
+
+---
+
+## 6.14 AI Memory
+
+Purpose:
+
+Stores confirmed business knowledge used to improve AI assistance.
+
+Fields:
+
+- id
+- business_id
+- memory_type
+- subject
+- memory_text
+- confidence
+- source_entity
+- source_entity_id
+- created_at
+- updated_at
+
+Rules:
+
+Only confirmed business information is stored.
+
+AI-generated assumptions are never stored.
+
+---
+
+## 6.15 Sync Queue
+
+Purpose:
+
+Stores offline operations awaiting synchronisation.
+
+Fields:
+
+- id
+- business_id
+- entity_type
+- operation
+- payload
+- status
+- retry_count
+- last_attempt_at
+- created_at
+
+Supported operations:
+
+- Create
+- Update
+- Delete
+
+Supported status values:
+
+- Pending
+- Processing
+- Completed
+- Failed
+
+---
+
+## 6.16 Media Files
+
+Purpose:
+
+Stores metadata for uploaded files.
+
+Actual binary files remain in object storage.
+
+Fields:
+
+- id
+- business_id
+- entity_type
+- entity_id
+- file_name
+- file_type
+- file_size
+- storage_path
+- uploaded_by
+- created_at
+
+Supported media:
+
+- Product Images
+- Receipts
+- Invoices
+- Warranty Documents
+- Customer Documents
+
+---
+
+# 7. Entity Relationships
+
+Business
+
+↓
+
+Business Members
+
+↓
+
+Users
+
+↓
+
+Customers
+
+↓
+
+Sales
+
+↓
+
+Sale Items
+
+↓
+
+Products
+
+↓
+
+Payments
+
+Business
+
+↓
+
+Expenses
+
+Business
+
+↓
+
+Timeline Events
+
+Business
+
+↓
+
+Audit Logs
+
+Business
+
+↓
+
+Notifications
+
+Business
+
+↓
+
+AI Memory
+
+Business
+
+↓
+
+Media Files
+
+Business
+
+↓
+
+Sync Queue
+
+---
+
+# 8. Referential Integrity Rules
+
+The following relationships are mandatory:
+
+Business → Customers
+
+Business → Products
+
+Business → Sales
+
+Sale → Sale Items
+
+Sale → Payments
+
+Customer → Sales
+
+Product → Sale Items
+
+Deletion Rules:
+
+- Businesses cannot be deleted while dependent records exist.
+- Customers referenced by sales cannot be permanently deleted.
+- Products referenced by sales cannot be permanently deleted.
+- Historical financial data must always remain valid.
+
+---
+
+# 9. Indexing Strategy
+
+Indexes should be created for:
+
+- business_id
+- customer_name
+- product_name
+- phone
+- email
+- sale_number
+- sale_date
+- payment_date
+- expense_date
+- created_at
+
+Composite indexes:
+
+- business_id + customer_name
+- business_id + product_name
+- business_id + sale_date
+- business_id + created_at
+
+Future support:
+
+- Full-text search
+- Semantic search for AI
+
+---
+
+# 10. Row Level Security (RLS)
+
+Every query must be filtered by business membership.
+
+Rules:
+
+- Users can only access businesses they belong to.
+- Owners have full access.
+- Staff permissions are role-based.
+- Administrative operations require elevated privileges.
+- AI requests inherit the user's permissions.
+
+---
+
+# 11. Data Integrity Rules
+
+The Rules Engine enforces:
+
+- Payment ≤ Outstanding Balance
+- Quantity > 0
+- Selling Price ≥ 0
+- Expense Amount > 0
+- Sale must contain at least one item
+- Duplicate detection before entity creation
+- Business ownership validation
+- Permission validation
+
+No financial transaction is committed until validation succeeds.
+
+---
+
+# 12. Soft Delete Policy
+
+Soft delete applies to:
+
+- Customers
+- Products
+- Expenses
+- Media Files
+
+Soft-deleted records:
+
+- Remain available for audit.
+- Are excluded from normal searches.
+- May be restored by authorised users.
+
+Financial records are never soft-deleted.
+
+---
+
+# 13. Data Retention
+
+Retention policy:
+
+- Audit Logs: Permanent
+- Timeline Events: Permanent
+- Sales: Permanent
+- Payments: Permanent
+- Expenses: Permanent
+- Notifications: Configurable
+- AI Memory: User-controlled
+- Media Files: Configurable
+
+No confirmed financial transaction should ever be permanently removed.
+
+---
+
+# 14. Future Expansion
+
+The data model reserves space for:
+
+- Inventory
+- Stock Movements
+- Suppliers
+- Purchase Orders
+- Branches
+- CRM
+- Payroll
+- Accounting
+- eCommerce
+- Public API
+
+Future modules must extend this model without breaking existing relationships.
+
+---
+
+# 15. Data Model Principles Summary
+
+The BizMate AI data model is designed to be:
+
+- Multi-tenant
+- Secure
+- Auditable
+- Offline-ready
+- AI-ready
+- Scalable
+- Extensible
+- High-performance
+- Maintainable
+- Consistent
+
+Every new entity introduced into the system must follow these principles.
