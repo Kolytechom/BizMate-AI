@@ -1,0 +1,643 @@
+# BizMate AI AI Architecture
+Version: 1.0
+Status: Approved
+Last Updated: 2026-07-26
+
+---
+
+# 1. Purpose
+
+This document defines the Artificial Intelligence architecture for BizMate AI.
+
+It specifies how AI understands user requests, processes business information, validates decisions, interacts with users, and assists with daily business operations.
+
+The AI is an assistant—not an autonomous decision-maker.
+
+All financial operations require explicit user confirmation before they are committed.
+
+---
+
+# 2. AI Design Principles
+
+The AI layer follows these principles:
+
+- Human-in-the-loop
+- Explainable
+- Predictable
+- Secure
+- Multilingual
+- Context-aware
+- Business-focused
+- Privacy-first
+- Extensible
+
+---
+
+# 3. AI Responsibilities
+
+The AI is responsible for:
+
+- Understanding voice commands
+- Understanding typed commands
+- Detecting user intent
+- Extracting business entities
+- Identifying duplicate records
+- Suggesting corrections
+- Answering business questions
+- Generating summaries
+- Providing daily business insights
+- Assisting with navigation
+- Helping users complete tasks faster
+
+The AI is NOT responsible for:
+
+- Automatically recording financial transactions
+- Inventing customers
+- Inventing products
+- Guessing prices
+- Guessing balances
+- Deleting business data without confirmation
+
+---
+
+# 4. AI Processing Pipeline
+
+Every AI request follows the same pipeline.
+
+```
+User Input
+      │
+      ▼
+Language Detection
+      │
+      ▼
+Speech-to-Text (if voice)
+      │
+      ▼
+Intent Detection
+      │
+      ▼
+Entity Extraction
+      │
+      ▼
+Duplicate Detection
+      │
+      ▼
+Rules Engine Validation
+      │
+      ▼
+Confidence Scoring
+      │
+      ▼
+Confirmation Card
+      │
+      ▼
+Database Write
+      │
+      ▼
+Timeline Event
+      │
+      ▼
+Audit Log
+      │
+      ▼
+AI Memory Update
+```
+
+Every financial write passes through this pipeline.
+
+---
+
+# 5. AI Modules
+
+The AI subsystem consists of:
+
+- Language Detection
+- Speech Recognition
+- Intent Engine
+- Entity Extraction Engine
+- Duplicate Detection Engine
+- Rules Engine
+- Confidence Engine
+- Confirmation Engine
+- AI Memory
+- Recommendation Engine
+- Analytics Engine
+
+Each module performs one responsibility only.
+
+---
+
+# 6. Language Support
+
+Version 1 supports:
+
+- English
+- Nigerian Pidgin
+- Yoruba
+- Hausa
+- Igbo
+
+Future versions may support additional languages.
+
+Users may switch languages at any time.
+
+Mixed-language conversations should be supported where practical.
+
+---
+
+# 7. Intent Recognition
+
+The AI must classify user requests into business intents.
+
+Examples:
+
+Create Customer
+
+Record Sale
+
+Receive Payment
+
+Record Expense
+
+Search Customer
+
+Search Product
+
+Generate Report
+
+Business Question
+
+Settings
+
+General Conversation
+
+If the intent cannot be determined confidently, clarification is required.
+
+---
+
+# 8. Entity Extraction
+
+The AI extracts business entities such as:
+
+Customer Name
+
+Product Name
+
+Amount
+
+Payment Method
+
+Sale Type
+
+Expense Category
+
+Date
+
+Reference Number
+
+Notes
+
+Every extracted entity receives a confidence score.
+
+---
+
+# 9. Confidence Scoring
+
+Each recognised entity is assigned a confidence percentage.
+
+Example:
+
+Customer
+
+98%
+
+Product
+
+96%
+
+Payment Type
+
+100%
+
+Amount
+
+99%
+
+If confidence falls below the configured threshold, the AI asks for clarification before proceeding.
+
+---
+
+# 10. Duplicate Detection
+
+Duplicate detection applies before creating:
+
+Customers
+
+Products
+
+Categories
+
+Suppliers (future)
+
+Branches (future)
+
+Detection methods include:
+
+- Exact Match
+- Case-Insensitive Match
+- Phonetic Match
+- Fuzzy Match
+- Semantic Match
+- Historical Confirmation
+
+Potential duplicates are presented to the user before creation.
+
+---
+
+# 11. Confirmation Workflow
+
+The AI never performs financial writes immediately.
+
+Instead, it displays a confirmation summary.
+
+Example:
+
+Customer:
+Ade Stores
+
+Product:
+HP ProDesk
+
+Amount:
+₦320,000
+
+Payment:
+Credit
+
+Outstanding:
+₦320,000
+
+Buttons:
+
+Confirm
+
+Edit
+
+Cancel
+
+Only "Confirm" commits the transaction.
+
+---
+
+# 12. Rules Engine Integration
+
+Every confirmed request is validated by the Rules Engine.
+
+Checks include:
+
+Customer exists
+
+Product exists
+
+Price valid
+
+Payment valid
+
+Business ownership
+
+User permissions
+
+Duplicate prevention
+
+If validation fails, the transaction is rejected with an explanation.
+
+---
+
+# 13. AI Memory
+
+AI Memory stores only confirmed business knowledge.
+
+Examples:
+
+Customer aliases
+
+Frequently purchased products
+
+Preferred payment methods
+
+Frequently used descriptions
+
+Business terminology
+
+Frequently asked questions
+
+The AI never stores assumptions or guesses.
+---
+
+# 14. AI Provider Abstraction Layer
+
+BizMate AI must remain independent of any single AI provider.
+
+The AI layer communicates through a provider abstraction interface.
+
+Supported providers include:
+
+- OpenAI
+- Google Gemini
+- Anthropic Claude
+- Lovable AI Gateway
+- Future local AI models
+
+Business logic must never directly depend on a provider-specific SDK.
+
+Changing providers should require only configuration changes.
+
+---
+
+# 15. Voice AI Architecture
+
+Voice interaction follows this pipeline.
+
+```
+Voice Input
+      │
+      ▼
+Noise Reduction
+      │
+      ▼
+Speech-to-Text
+      │
+      ▼
+Language Detection
+      │
+      ▼
+Intent Recognition
+      │
+      ▼
+Entity Extraction
+      │
+      ▼
+Duplicate Detection
+      │
+      ▼
+Rules Engine
+      │
+      ▼
+Confirmation
+      │
+      ▼
+Database
+```
+
+Voice commands should tolerate natural speech patterns.
+
+Examples:
+
+"I sold one HP printer to Ade."
+
+"I collected ₦50,000 from Mr. Bello."
+
+"Record fuel expense."
+
+---
+
+# 16. AI Business Assistant
+
+The AI Assistant helps users by:
+
+- Recording sales
+- Recording expenses
+- Recording payments
+- Searching customers
+- Searching products
+- Explaining reports
+- Answering business questions
+- Guiding first-time users
+
+The AI should communicate professionally and concisely.
+
+---
+
+# 17. Daily Business Brief
+
+The AI generates a daily summary.
+
+Example:
+
+Today's Sales
+
+Today's Expenses
+
+Outstanding Credit
+
+New Customers
+
+Top Selling Products
+
+Low Activity Alerts
+
+Business Recommendations
+
+Daily Briefs are generated from confirmed business data only.
+
+---
+
+# 18. AI Recommendations
+
+The AI may proactively suggest:
+
+- Follow up overdue customers.
+- Frequently purchased products.
+- Best-selling products.
+- Slow-moving products.
+- High-spending customers.
+- Unusual expenses.
+- Duplicate customer detection.
+- Duplicate product detection.
+
+Recommendations are advisory only.
+
+The user decides whether to act.
+
+---
+
+# 19. Business Analytics AI
+
+The AI provides intelligent analysis such as:
+
+Sales Trends
+
+Revenue Growth
+
+Expense Breakdown
+
+Customer Purchase Behaviour
+
+Payment Trends
+
+Monthly Performance
+
+Future modules may include:
+
+Demand Forecasting
+
+Profit Forecasting
+
+Cash Flow Prediction
+
+Customer Churn Prediction
+
+---
+
+# 20. AI Guardrails
+
+The AI must never:
+
+- Invent customers.
+- Invent products.
+- Invent prices.
+- Invent payment amounts.
+- Invent balances.
+- Modify financial records without confirmation.
+- Delete records automatically.
+- Override business rules.
+- Ignore the Rules Engine.
+- Guess missing financial information.
+
+Whenever information is incomplete, the AI asks for clarification.
+
+---
+
+# 21. Security and Privacy
+
+The AI processes only data that the authenticated user is authorised to access.
+
+The AI:
+
+- Respects Row Level Security.
+- Never bypasses permissions.
+- Never exposes another business's data.
+- Never stores confidential information outside approved storage.
+- Never trains foundation models using customer business data without explicit consent.
+
+---
+
+# 22. AI Auditability
+
+Every AI-assisted action records:
+
+- User
+- Timestamp
+- Request
+- AI interpretation
+- Confidence scores
+- User confirmation
+- Final action
+- Outcome
+
+These records support troubleshooting and compliance.
+
+---
+
+# 23. Error Handling
+
+When confidence is low:
+
+The AI asks for clarification.
+
+When validation fails:
+
+The AI explains the reason and suggests corrective actions.
+
+When an external AI provider is unavailable:
+
+- Notify the user.
+- Retry if appropriate.
+- Offer manual entry so business operations can continue.
+
+The application should remain usable even if AI services are temporarily unavailable.
+
+---
+
+# 24. Performance Targets
+
+Target response times:
+
+Voice-to-text:
+
+Less than 3 seconds
+
+Intent recognition:
+
+Less than 1 second
+
+AI response:
+
+Less than 5 seconds
+
+Confirmation generation:
+
+Less than 2 seconds
+
+AI processing should never block unrelated application features.
+
+---
+
+# 25. AI Learning Strategy
+
+BizMate AI improves through confirmed user interactions.
+
+The AI may learn:
+
+- Frequently used customer names
+- Product aliases
+- Preferred transaction wording
+- Common business terminology
+- User language preferences
+
+The AI must not learn from rejected suggestions or failed validations.
+
+---
+
+# 26. Future AI Capabilities
+
+Planned enhancements include:
+
+- Voice-only operation
+- Receipt OCR
+- Invoice OCR
+- Barcode recognition
+- Intelligent document extraction
+- Smart reminders
+- Automated business reports
+- Sales forecasting
+- Expense forecasting
+- Customer risk scoring
+- Inventory prediction
+- Natural-language dashboard queries
+
+Future capabilities must continue to follow the Human-in-the-Loop principle.
+
+---
+
+# 27. AI Architecture Principles Summary
+
+Every AI feature introduced into BizMate AI must comply with the following principles:
+
+- Human Approval Before Financial Writes
+- Security by Default
+- Privacy by Design
+- Explainable Decisions
+- Confidence-Based Validation
+- Rules Engine Enforcement
+- Provider Independence
+- Offline Resilience
+- Multilingual Support
+- Business Context Awareness
+- Retrieval-Augmented Memory
+- Auditability
+- Scalability
+- Accessibility
+
+These principles are mandatory for all current and future AI functionality.
