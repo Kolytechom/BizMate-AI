@@ -1,0 +1,716 @@
+# BizMate AI Design System (Version 1.0)
+
+---
+
+# Purpose
+
+This document defines the official visual language of BizMate AI.
+
+Every screen, component and future feature MUST follow this document.
+
+If there is any conflict between generated UI and this document, this Design System takes precedence.
+
+---
+
+# Design Philosophy
+
+BizMate AI should feel like:
+
+• Professional
+• Intelligent
+• Friendly
+• Fast
+• Premium
+• Clean
+• Modern (2026)
+• Trustworthy
+
+The interface should reduce cognitive load.
+
+Users should always know:
+
+- Where they are
+- What to do next
+- What changed
+- Whether an action succeeded or failed
+
+The application must never feel cluttered.
+
+Whitespace is part of the design.
+
+---
+
+# Design Inspiration
+
+The overall quality should be comparable to:
+
+- Stripe Dashboard
+- Linear
+- Notion
+- Vercel
+- Microsoft 365
+- Slack
+- Figma
+
+Do NOT imitate any of these directly.
+
+Use them only as quality benchmarks.
+
+---
+
+# Brand Personality
+
+BizMate AI is:
+
+Professional
+Confident
+Reliable
+Modern
+Approachable
+
+It is NOT:
+
+Playful
+Cartoonish
+Overly colourful
+Gamified
+
+---
+
+# Colour System
+
+## Primary
+
+Deep Navy
+
+#123A7A
+
+Used for:
+
+Navigation
+
+Main headings
+
+Logo text
+
+Primary identity
+
+---
+
+## Secondary
+
+BizMate Blue
+
+#2F80ED
+
+Used for:
+
+Primary buttons
+
+Links
+
+Interactive elements
+
+Charts
+
+Focus rings
+
+---
+
+## Accent
+
+Emerald
+
+#27AE60
+
+Used for:
+
+Income
+
+Paid invoices
+
+Success
+
+Positive AI suggestions
+
+---
+
+## Warning
+
+Amber
+
+#F2994A
+
+Used for:
+
+Warnings
+
+Pending payments
+
+Notifications
+
+---
+
+## Danger
+
+Crimson
+
+#EB5757
+
+Used for:
+
+Errors
+
+Delete
+
+Overdue invoices
+
+Critical alerts
+
+---
+
+## Neutral
+
+Dark Grey
+
+#333333
+
+Medium Grey
+
+#6B7280
+
+Light Grey
+
+#E5E7EB
+
+Background
+
+#F8FAFC
+
+Dark Background
+
+#0F172A
+
+---
+
+# Gradients
+
+Allowed:
+
+Deep Navy → BizMate Blue
+
+BizMate Blue → Emerald
+
+Never use more than two colours.
+
+Avoid rainbow gradients.
+
+---
+
+# Typography
+
+Font Family
+
+Inter Variable
+
+Fallback:
+
+Inter
+
+Segoe UI
+
+Roboto
+
+Arial
+
+---
+
+# Headings
+
+H1
+
+36px
+
+Bold
+
+---
+
+H2
+
+30px
+
+Semi Bold
+
+---
+
+H3
+
+24px
+
+Semi Bold
+
+---
+
+H4
+
+20px
+
+Medium
+
+---
+
+Body
+
+16px
+
+Regular
+
+---
+
+Small Text
+
+14px
+
+Regular
+
+---
+
+Caption
+
+12px
+
+Medium
+
+---
+
+Buttons
+
+16px
+
+Medium
+
+---
+
+# Spacing
+
+Base spacing
+
+8px
+
+Spacing scale
+
+8
+
+16
+
+24
+
+32
+
+40
+
+48
+
+64
+
+96
+
+Do not invent random spacing.
+
+---
+
+# Border Radius
+
+Small
+
+8px
+
+Medium
+
+12px
+
+Large
+
+16px
+
+Extra Large
+
+24px
+
+Pill
+
+9999px
+
+---
+
+# Shadows
+
+Level 1
+
+Very soft
+
+Cards
+
+---
+
+Level 2
+
+Dashboard cards
+
+Hover state
+
+---
+
+Level 3
+
+Dialogs
+
+Dropdowns
+
+Floating cards
+
+---
+
+Never use harsh shadows.
+
+---
+
+# Glassmorphism
+
+Allowed only for:
+
+Navigation bar
+
+Floating AI Assistant
+
+Command Palette
+
+Never for tables.
+
+Never for forms.
+
+---
+
+# Buttons
+
+Primary
+
+Solid Blue
+
+White text
+
+---
+
+Secondary
+
+White
+
+Blue border
+
+Blue text
+
+---
+
+Ghost
+
+Transparent
+
+Hover only
+
+---
+
+Danger
+
+Red
+
+---
+
+Success
+
+Green
+
+---
+
+Icon Button
+
+Rounded
+
+44x44 minimum
+
+---
+
+# Forms
+
+Large inputs
+
+16px text
+
+Soft borders
+
+Strong focus state
+
+Labels always visible
+
+Never rely on placeholders alone.
+
+---
+
+# Cards
+
+Cards should have:
+
+16–24px padding
+
+Subtle shadow
+
+Large radius
+
+Clean whitespace
+
+Optional icon
+
+Never overcrowd cards.
+
+---
+
+# Icons
+
+Use ONE icon library only.
+
+Lucide React
+
+Do not mix icon libraries.
+
+---
+
+# Animations
+
+Maximum duration:
+
+250ms
+
+Use:
+
+Fade
+
+Scale
+
+Slide
+
+Never bounce.
+
+Never spin unnecessarily.
+
+Animations should feel natural.
+
+---
+
+# Dashboard
+
+The dashboard should immediately answer:
+
+How much did I sell today?
+
+How much cash is available?
+
+Who owes me?
+
+Recent activity
+
+AI suggestions
+
+Quick actions
+
+The dashboard should never feel empty.
+
+---
+
+# Mobile Experience
+
+Design mobile first.
+
+Minimum touch target:
+
+44px
+
+Bottom navigation
+
+Maximum five items
+
+Floating AI Assistant button
+
+Thumb-friendly controls
+
+---
+
+# Desktop Experience
+
+Collapsible sidebar
+
+Sticky top navigation
+
+Search always accessible
+
+Command palette shortcut:
+
+CTRL + K
+
+---
+
+# Tables
+
+Readable
+
+Zebra striping optional
+
+Sticky headers
+
+Search above table
+
+Filters visible
+
+Pagination simple
+
+---
+
+# Empty States
+
+Every module must include:
+
+Illustration/Icon
+
+Helpful explanation
+
+Primary action button
+
+---
+
+# Loading States
+
+Use skeleton loaders.
+
+Never show blank pages.
+
+---
+
+# Notifications
+
+Toast notifications
+
+Top-right desktop
+
+Top mobile
+
+Auto dismiss
+
+Success
+
+Warning
+
+Error
+
+Information
+
+---
+
+# Accessibility
+
+WCAG AA minimum
+
+Keyboard navigation
+
+Visible focus
+
+ARIA labels
+
+Proper contrast
+
+Dark mode parity
+
+---
+
+# Theme Support
+
+Mandatory:
+
+Light Mode
+
+Dark Mode
+
+System Mode
+
+Theme preference must persist.
+
+---
+
+# Logo Usage
+
+Always use the official logo.
+
+Never stretch.
+
+Never crop.
+
+Maintain clear spacing.
+
+Use:
+
+Logo + Wordmark
+
+Logo only
+
+Wordmark only
+
+according to context.
+
+---
+
+# Illustration Style
+
+Minimal
+
+Modern
+
+Business-focused
+
+No cartoons
+
+No clipart
+
+No low-quality AI images
+
+---
+
+# Photography
+
+Real people
+
+Real businesses
+
+African representation where appropriate
+
+Professional lighting
+
+No obvious AI artefacts
+
+---
+
+# AI Assistant
+
+The AI assistant should feel calm and helpful.
+
+Not robotic.
+
+Not overly conversational.
+
+Professional and concise.
+
+---
+
+# Quality Standard
+
+Every new page should make a first-time user think:
+
+"This feels like premium business software."
+
+If a page does not meet that standard, redesign it before implementation.
